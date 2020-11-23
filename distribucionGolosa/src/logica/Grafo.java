@@ -13,49 +13,56 @@ public class Grafo {
     }
     
     
-//    public void agregarArco(Arco Arco) {
-//    	if((!this.getArcos().contains(Arco) && 
-//    			!Arco.getNodo1().equals(Arco.getNodo2())) {	
-//	    		
-//    		this.getArcos().add(Arco);
-//	    	 
-//    		if(!this.getnodos().contains(Arco.getNodo1())) {
-//    			this.getnodos().add(Arco.getNodo1());
-//    		}
-//    		
-//    		if(!this.getnodos().contains(Arco.getNodo2())) {
-//    			this.getnodos().add(Arco.getNodo2());
-//    		}
-//    	}
-//	}
-//
-//	public void eliminarArco(Arco Arco) {
-//    	getArcos().remove(Arco);
-//    	Arco.getNodo1().eliminarVecino(Arco.getNodo2());
-//    	Arco.getNodo2().eliminarVecino(Arco.getNodo1());
-//    }
-//	
-//	public void eliminarNodo(Nodo Nodo) {
-//		getnodos().remove(Nodo);
-//	}
-//    
-//    public boolean existeArco(Arco Arco) {
-//    	return this.getArcos().contains(Arco);
-//    }
-//
-//	public ArrayList<Nodo> getnodos() {
-//		return nodos;
-//	}
-//
-//	public void setnodos(ArrayList<Nodo> nodos) {
-//		this.nodos = nodos;
-//	}
-//
-//	public ArrayList<Arco> getArcos() {
-//		return Arcos;
-//	}
-//
-//	public void setArcos(ArrayList<Arco> Arcos) {
-//		this.Arcos = Arcos;
-//	}
+    public void agregarArco(Arco Arco) {
+    	if((!this.getArcos().contains(Arco) && 
+    			!Arco.getOrigen().equals(Arco.getDestino()))) {	
+	    		
+    		this.getArcos().add(Arco);
+	    	
+    		if(!this.getNodos().contains(Arco.getOrigen())) 
+    			this.getNodos().add(Arco.getOrigen());
+    		
+    		if(!this.getNodos().contains(Arco.getDestino())) 
+    			this.getNodos().add(Arco.getDestino());
+    			
+    	}
+	}
+    
+    public void eliminarArco(Arco Arco) {
+    	getArcos().remove(Arco);
+    	Arco.getOrigen().eliminarVecino(Arco.getDestino());
+    	Arco.getDestino().eliminarVecino(Arco.getOrigen());
+    }
+	
+	public void eliminarNodo(Nodo Nodo) {
+		getNodos().remove(Nodo);
+	}
+    
+    public boolean existeArco(Arco Arco) {
+    	return this.getArcos().contains(Arco);
+    }
+
+
+	public ArrayList<Arco> getArcos() {
+		return arcos;
+	}
+
+
+	public void setArcos(ArrayList<Arco> arcos) {
+		this.arcos = arcos;
+	}
+
+
+	public ArrayList<Nodo> getNodos() {
+		return nodos;
+	}
+
+
+	public void setNodos(ArrayList<Nodo> nodos) {
+		this.nodos = nodos;
+	}
+
+	
+
+
 }
