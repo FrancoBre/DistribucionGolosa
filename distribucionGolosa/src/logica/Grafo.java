@@ -12,6 +12,7 @@ public class Grafo {
     	this.arcos = new ArrayList<Arco>();
     }
     
+    
 //    public void agregarArco(Arco Arco) {
 //    	if((!this.getArcos().contains(Arco) && 
 //    			!Arco.getNodo1().equals(Arco.getNodo2())) {	
