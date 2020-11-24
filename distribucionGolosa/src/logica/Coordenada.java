@@ -1,28 +1,27 @@
 package logica;
 
 public class Coordenada {
-	private double x; 
-	private double y; 
+	private double latitud; 
+	private double longitud; 
 	
-	public Coordenada (double X,double Y) {
-		this.x= X; 
-		this.y= Y; 
+	public Coordenada (double latitud, double longitud) {
+		this.latitud= latitud; 
+		this.longitud= longitud; 
 	}
 
-	public double getX() {
-		return x;
+	public double getLatitud() {
+		return latitud;
 	}
 
-	public void setX(double x) {
-		this.x = x;
+	public double getLongitud() {
+		return longitud;
 	}
-
-	public double getY() {
-		return y;
+	
+	@Override
+	public boolean equals(Object o) {
+		Coordenada otra = (Coordenada) o;
+		
+		return this.latitud == otra.getLatitud() && 
+				this.longitud == otra.getLongitud();
 	}
-
-	public void setY(double y) {
-		this.y = y;
-	}	
-
 }

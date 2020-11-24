@@ -6,10 +6,11 @@ public class Nodo {
 	private ArrayList<Nodo> vecinos;
 	private Coordenada c; 
 
-	public Nodo(Coordenada coor) {
+	public Nodo(Coordenada coordenada) {
 		this.vecinos = new ArrayList<Nodo>();
-		this.c = coor;
+		this.c = coordenada;
 	}
+	
 	public void insertarVecino(Nodo Nodo) {
 		if(!this.vecinos.contains(Nodo) && 
 				!Nodo.getCoordenada().equals(this.getCoordenada()))

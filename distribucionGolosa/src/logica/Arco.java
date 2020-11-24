@@ -8,15 +8,9 @@ public class Arco {
 	public Arco(Cliente origen, CentroDistribucion destino, double peso) {
 		this.origen = origen;
 		this.destino = destino;
-		this.peso = haversine(origen, destino);
+		this.peso = Algoritmos.haversine(origen.getCoordenada(), 
+										 destino.getCoordenada());
 	 }
-
-	//Calcula la distancia en linea recta entre dos puntos en el mapa
-	double haversine(Nodo origen, Nodo destino) {
-		
-		return 0;
-	}
-	 
 	 
 	public Nodo getOrigen() {
 		return origen;
