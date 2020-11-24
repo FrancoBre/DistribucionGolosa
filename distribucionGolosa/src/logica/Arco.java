@@ -1,35 +1,32 @@
 package logica;
 
 public class Arco {
-	private Nodo origen, destino;
-	private int peso;
-	 public Arco(Nodo origen, Nodo destino, int peso){
-		this.origen=origen;
-		this.destino=destino;
-		this.peso=peso;
+	private Nodo origen;
+	private Nodo destino;
+	private double peso;
+	
+	public Arco(Cliente origen, CentroDistribucion destino, double peso) {
+		this.origen = origen;
+		this.destino = destino;
+		this.peso = haversine(origen, destino);
 	 }
+
+	//Calcula la distancia en linea recta entre dos puntos en el mapa
+	double haversine(Nodo origen, Nodo destino) {
+		
+		return 0;
+	}
+	 
 	 
 	public Nodo getOrigen() {
 		return origen;
-	}
-	
-	public void setOrigen(Nodo origen) {
-		this.origen = origen;
 	}
 	
 	public Nodo getDestino() {
 		return destino;
 	}
 	
-	public void setDestino(Nodo destino) {
-		this.destino = destino;
-	}
-	
-	public int getPeso() {
+	public double getPeso() {
 		return peso;
 	}
-	
-	public void setPeso(int peso) {
-		this.peso = peso;
-	} 
 }
