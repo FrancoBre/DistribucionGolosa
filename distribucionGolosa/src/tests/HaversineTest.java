@@ -11,7 +11,7 @@ public class HaversineTest {
 
 	@Test
 	public void distanciaEntreTest() {
-		assertEquals(120.41, Algoritmos.haversine(ushuaia(), rioGrande()), 100);
+		assertEquals(120.41, Algoritmos.calcularDistancia(ushuaia(), rioGrande()), 100);
 	}
 
 	public Coordenada ushuaia() {
