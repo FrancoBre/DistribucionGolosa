@@ -8,7 +8,7 @@ public class Arco {
 	public Arco(Cliente origen, CentroDistribucion destino, double peso) {
 		this.origen = origen;
 		this.destino = destino;
-		this.peso = Algoritmos.calcularDistanciaEnLineaRecta(origen.getCoordenada(), 
+		this.peso = Algoritmos.calcularDistancia(origen.getCoordenada(), 
 										 destino.getCoordenada());
 	 }
 	 
