@@ -24,4 +24,9 @@ public class Coordenada {
 		return this.latitud == otra.getLatitud() && 
 				this.longitud == otra.getLongitud();
 	}
+	
+	@Override
+	public String toString() {
+		return "Latitud= "+latitud + ", longitud= "+longitud;
+	}
 }

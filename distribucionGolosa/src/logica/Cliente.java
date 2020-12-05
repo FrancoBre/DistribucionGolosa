@@ -12,4 +12,8 @@ public class Cliente extends Nodo {
 		super(coor);
 		this.nombre = nombre;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
 }

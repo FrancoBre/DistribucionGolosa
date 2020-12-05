@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Nodo {
 	private ArrayList<Nodo> vecinos;
-	private Coordenada c; 
+	private Coordenada coordenada; 
 
 	public Nodo(Coordenada coordenada) {
 		this.vecinos = new ArrayList<Nodo>();
-		this.c = coordenada;
+		this.coordenada = coordenada;
 	}
 	
 	public void insertarVecino(Nodo Nodo) {
@@ -33,34 +33,27 @@ public class Nodo {
 	public boolean tieneVecino(Nodo Nodo) {
 		return Nodo.vecinos.isEmpty();
 	}
-	
-	public ArrayList<Nodo> getVecinos() {
-		return vecinos;
-	}
-
-	public void setVecinos(ArrayList<Nodo> vecinos) {
-		this.vecinos = vecinos;
-	}
 
 	public Coordenada getCoordenada() {
-		return c;
+		return coordenada;
 	}
-
-	public void setI(Coordenada i) {
-		this.c = i;
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<Nodo> getVecinos() {
+		return (ArrayList<Nodo>) vecinos.clone();
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		Nodo Nodo = (Nodo) o;
 		
-		return this.c.equals(Nodo.getCoordenada());
+		return this.coordenada.equals(Nodo.getCoordenada());
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append(c.toString()+"\nCon los vecinos: {");
+		string.append(coordenada.toString()+"\nCon los vecinos: {");
 		
 		for(Nodo v : vecinos) 
 			string.append(v.getCoordenada().toString()+"}\n");

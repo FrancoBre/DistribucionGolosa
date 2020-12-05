@@ -13,9 +13,11 @@ public class Instancia {
 		this.k = k;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<Cliente> getClientes() {
-		return clientes;
+		return (ArrayList<Cliente>) clientes.clone();
 	}
+	
 	public void setClientes(ArrayList<Cliente> clientes) {
 		this.clientes = clientes;
 	}
