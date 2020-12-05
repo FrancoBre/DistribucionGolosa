@@ -33,7 +33,7 @@ public class Algoritmos {
 	}
 	
 	// Calcula "qué tan bueno es un centro de distribucion" para los clientes
-	private static void valorarCentro(CentroDistribucion centro, ArrayList<Cliente> clientes) {
+	static void valorarCentro(CentroDistribucion centro, ArrayList<Cliente> clientes) {
 		Digrafo grafo = new Digrafo();
 		int distanciaPromedio = 0;
 		
@@ -88,10 +88,19 @@ public class Algoritmos {
 		centros.add(centro3);
 		
 		for (CentroDistribucion centro : centros) {
+			System.out.println("\n");
 			for (Cliente cliente : clientes) {
 				System.out.println("Distancia entre cliente "+cliente.getNombre()+" y centro "
 						+ centro.getNombre()+" = "+ Algoritmos.calcularDistancia(cliente.getCoordenada(), centro.getCoordenada()));
 			}
 		}
+		
+		System.out.println();
+		
+		for (CentroDistribucion centro : centros) {
+			Algoritmos.valorarCentro(centro, clientes);
+			System.out.println("Valoración para el centro" + centro.getNombre() + " = " + centro.getDistanciaPromedio());
+		}
+		
 	}
 }
