@@ -26,13 +26,13 @@ public class Algoritmos {
 			return r * c;
 	}
 
-	// Añade la distancia promedio de todos los centros de distribucion de una instancia
+	// Aniade la distancia promedio de todos los centros de distribucion de una instancia
 	public static void valorarCentros(Instancia instancia) {
 		for(CentroDistribucion c : instancia.getCentros())
 			valorarCentro(c, instancia.getClientes());
 	}
 	
-	// Calcula "qué tan bueno es un centro de distribucion" para los clientes
+	// Calcula "que tan bueno es un centro de distribucion" para los clientes
 	static void valorarCentro(CentroDistribucion centro, ArrayList<Cliente> clientes) {
 		Digrafo grafo = new Digrafo();
 		int distanciaPromedio = 0;
