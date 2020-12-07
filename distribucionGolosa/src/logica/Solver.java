@@ -2,14 +2,9 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Solver {
 	Instancia instancia;
-	/*
-	public Solver(Instancia instancia, Comparator<CentroDistribucion> comparador) {
-		this.instancia = instancia;
-	}*/
 	
 	public Solver(Instancia instancia) {
 		this.instancia = instancia;
@@ -26,7 +21,6 @@ public class Solver {
 		return ret;
 	}
 
-	@SuppressWarnings("unchecked")
 	public ArrayList<CentroDistribucion> centrosOrdenados() {
 		ArrayList<CentroDistribucion> ret = this.instancia.getCentros();
 		Collections.sort(ret);

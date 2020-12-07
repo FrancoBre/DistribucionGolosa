@@ -59,6 +59,5 @@ public class Nodo {
 			string.append(v.getCoordenada().toString()+"}\n");
 			
 		return string.toString();
-		
 	}	
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import logica.Algoritmos;
 import logica.CentroDistribucion;
 import logica.Cliente;
 import logica.Coordenada;
@@ -14,8 +15,28 @@ import logica.Solver;
 
 public class SolverTest {
 
+	@Test(expected = RuntimeException.class)
+	public void centrosNoValoradosTest() {
+		Instancia instancia = ejemplo(5);
+		Solver solver = new Solver(instancia);
+		solver.resolver();
+	}
+	
 	@Test
-	public void centrosOrdenadosTest() {
+	public void centrosOrdenadosTest() {	
+		Instancia instancia = ejemplo(5);
+		Solver solver = new Solver(instancia);
+		
+		Algoritmos.valorarCentros(instancia);	// Esto debe hacerse en la clase aplicación
+		
+		assertEquals(new Coordenada(-34.63524, -58.7641), solver.centrosOrdenados().get(0).getCoordenada());
+		assertEquals(new Coordenada(-34.60967, -58.78195), solver.centrosOrdenados().get(1).getCoordenada());
+		assertEquals(new Coordenada(-34.65119, -58.78985), solver.centrosOrdenados().get(2).getCoordenada());
+		assertEquals(new Coordenada(-34.58664, -58.76084), solver.centrosOrdenados().get(3).getCoordenada());
+		assertEquals(new Coordenada(-34.62606, -58.70745), solver.centrosOrdenados().get(4).getCoordenada());
+	}
+	
+	public Instancia ejemplo(int k) {
 		ArrayList<CentroDistribucion> centros = new ArrayList<CentroDistribucion>();
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 		
@@ -79,10 +100,6 @@ public class SolverTest {
 		Cliente cliente10 = new Cliente(c10, "Cliente 10");
 		clientes.add(cliente10);
 		
-		Instancia instancia = new Instancia(clientes, centros, 5);
-		Solver solver = new Solver(instancia);
-		
-		assertEquals(centro2, solver.centrosOrdenados().get(0));
+		return new Instancia(clientes, centros, k);
 	}
-
 }
