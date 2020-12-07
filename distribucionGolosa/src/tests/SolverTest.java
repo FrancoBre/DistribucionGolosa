@@ -9,6 +9,7 @@ import org.junit.Test;
 import logica.Algoritmos;
 import logica.CentroDistribucion;
 import logica.Cliente;
+import logica.ComparadorPorDistPromedio;
 import logica.Coordenada;
 import logica.Instancia;
 import logica.Solver;
@@ -18,14 +19,14 @@ public class SolverTest {
 	@Test(expected = RuntimeException.class)
 	public void centrosNoValoradosTest() {
 		Instancia instancia = ejemplo(5);
-		Solver solver = new Solver(instancia);
+		Solver solver = new Solver(instancia, new ComparadorPorDistPromedio());
 		solver.resolver();
 	}
 	
 	@Test
 	public void centrosOrdenadosTest() {	
 		Instancia instancia = ejemplo(5);
-		Solver solver = new Solver(instancia);
+		Solver solver = new Solver(instancia, new ComparadorPorDistPromedio());
 		
 		Algoritmos.valorarCentros(instancia);	// Esto debe hacerse en la clase aplicación
 		

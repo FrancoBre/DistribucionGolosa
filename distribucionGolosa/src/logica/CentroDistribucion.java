@@ -1,6 +1,6 @@
 package logica;
 
-public class CentroDistribucion extends Nodo implements Comparable<Object> {
+public class CentroDistribucion extends Nodo {
 	private String nombre;
 	int distanciaPromedio;
 	
@@ -25,18 +25,5 @@ public class CentroDistribucion extends Nodo implements Comparable<Object> {
 
 	public void setDistanciaPromedio(int distanciaPromedio) {
 		this.distanciaPromedio = distanciaPromedio;
-	}
-
-	@Override
-	public int compareTo(Object that) {
-		if(this.getDistanciaPromedio() == -1) throw new RuntimeException("Deben valorarse los centros segun su distancia promedio");
-		
-		if(this.getDistanciaPromedio() < ((CentroDistribucion) that).getDistanciaPromedio()) 
-			return -1;
-		
-		if(this.getDistanciaPromedio() == ((CentroDistribucion) that).getDistanciaPromedio()) 
-			return 0;
-		
-		return 1;
 	}
 }
