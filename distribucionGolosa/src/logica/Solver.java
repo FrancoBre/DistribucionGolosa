@@ -6,8 +6,12 @@ import java.util.Comparator;
 
 public class Solver {
 	Instancia instancia;
-	
+	/*
 	public Solver(Instancia instancia, Comparator<CentroDistribucion> comparador) {
+		this.instancia = instancia;
+	}*/
+	
+	public Solver(Instancia instancia) {
 		this.instancia = instancia;
 	}
 	
@@ -23,8 +27,8 @@ public class Solver {
 	}
 
 	@SuppressWarnings("unchecked")
-	private ArrayList<CentroDistribucion> centrosOrdenados() {
-		ArrayList<CentroDistribucion> ret = new ArrayList<CentroDistribucion>();
+	public ArrayList<CentroDistribucion> centrosOrdenados() {
+		ArrayList<CentroDistribucion> ret = this.instancia.getCentros();
 		Collections.sort(ret);
 		
 		return ret;

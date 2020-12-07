@@ -19,10 +19,10 @@ public class Coordenada {
 	
 	@Override
 	public boolean equals(Object o) {
-		Coordenada otra = (Coordenada) o;
+		Coordenada that = (Coordenada) o;
 		
-		return this.latitud == otra.getLatitud() && 
-				this.longitud == otra.getLongitud();
+		return this.latitud == that.getLatitud() && 
+				this.longitud == that.getLongitud();
 	}
 	
 	@Override

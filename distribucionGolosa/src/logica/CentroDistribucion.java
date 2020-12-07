@@ -28,11 +28,11 @@ public class CentroDistribucion extends Nodo implements Comparable {
 	@Override
 	public int compareTo(Object that) {
 		if(this.getDistanciaPromedio() < ((CentroDistribucion) that).getDistanciaPromedio()) 
-			return -1;
+			return 1;
 		
 		if(this.getDistanciaPromedio() == ((CentroDistribucion) that).getDistanciaPromedio()) 
 			return 0;
 		
-		return 1;
+		return -1;
 	}
 }
