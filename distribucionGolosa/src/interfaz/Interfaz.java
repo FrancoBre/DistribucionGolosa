@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+
+import logica.Cliente;
+
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -56,6 +59,7 @@ public class Interfaz {
 		//Action leer Clientes
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+//				Cliente cli = new Cliente(coor);
 			}
 		});
 		btnNewButton.setBounds(10, 58, 175, 29);
