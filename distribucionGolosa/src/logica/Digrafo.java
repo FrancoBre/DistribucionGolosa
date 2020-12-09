@@ -47,7 +47,6 @@ public class Digrafo {
 		return arcos;
 	}
 
-
 	public void setArcos(ArrayList<Arco> arcos) {
 		this.arcos = arcos;
 	}
@@ -57,12 +56,23 @@ public class Digrafo {
 		return nodos;
 	}
 
-
 	public void setNodos(ArrayList<Nodo> nodos) {
 		this.nodos = nodos;
 	}
 
-	
-
-
+	public Arco arcoDeMenorPeso() {
+		Arco min = this.getArcos().get(0);
+		
+		for(Arco a : this.getArcos()) 
+			if(a.getPeso() < min.getPeso()) min = a;
+				
+		return min;
+	}
 }
+
+
+
+
+
+
+

@@ -15,18 +15,31 @@ import logica.Instancia;
 public class AlgoritmosTest {
 
 	@Test
-	public void distanciaEntreTest1() {
+	public void distanciaEntreTest() {
 		assertEquals(120.41, Algoritmos.calcularDistancia(ushuaia(), rioGrande()), 100);
 	}
 	
 	@Test
-	public void valorarCentroTest() {
+	public void valorarCentroDistPromedioTest() {
 		Instancia instancia = new Instancia(clientesEjemplo(), centrosEjemplo());
-		Algoritmos.valorarCentros(instancia);
+		Algoritmos.valorarCentrosDistPromedio(instancia);
 		
 		assertEquals(28269, instancia.getCentros().get(0).getDistanciaPromedio());
 		assertEquals(42135, instancia.getCentros().get(1).getDistanciaPromedio());
 		assertEquals(13618, instancia.getCentros().get(2).getDistanciaPromedio());
+	}
+	
+	@Test
+	public void centroMasCercanoTest() {
+		Instancia instancia = new Instancia(clientesEjemplo(), centrosEjemplo());
+		
+		Coordenada coor1 = new Coordenada(43.645074, -115.993081);
+		Cliente cliente = new Cliente(coor1);
+		
+		Coordenada coor2 = new Coordenada(41.303921, -81.901693);
+		CentroDistribucion centro = new CentroDistribucion(coor2);
+		
+		assertEquals(centro, Algoritmos.centroMasCercano(cliente, instancia));
 	}
 
 	public Coordenada ushuaia() {

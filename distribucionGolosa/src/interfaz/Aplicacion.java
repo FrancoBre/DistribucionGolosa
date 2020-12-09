@@ -1,43 +1,35 @@
 package interfaz;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import logica.ComparadorPorDistPromedio;
+import logica.Instancia;
+import logica.Solver;
+import logica.Algoritmos;
+import logica.ComparadorPorConveniencia;
 
 public class Aplicacion {
+	private Instancia instancia;
 
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Aplicacion window = new Aplicacion();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public Aplicacion() {
-		initialize();
+		this.instancia = crearInstanciaConJSON();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private Instancia crearInstanciaConJSON() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
+	
+	public void realizarHeuristica1() {
+		Solver solver = new Solver(this.instancia, new ComparadorPorDistPromedio());
+		Algoritmos.valorarCentrosDistPromedio(instancia);
+		solver.resolver();
+	}
+	
+	public void realizarHeuristica2() {
+		Solver solver = new Solver(this.instancia, new ComparadorPorConveniencia(this.instancia));
+		solver.resolver();
+	}
+	
+	public void realizarAlgoritmoExacto() {
+		// TODO
+	}
 }

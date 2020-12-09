@@ -11,6 +11,13 @@ public class Arco {
 		this.peso = Algoritmos.calcularDistancia(origen.getCoordenada(), 
 										 destino.getCoordenada());
 	}
+	
+	public Arco(CentroDistribucion destino, Cliente origen) {
+		this.origen = origen;
+		this.destino = destino;
+		this.peso = Algoritmos.calcularDistancia(origen.getCoordenada(), 
+										 destino.getCoordenada());
+	}
 	 
 	public Nodo getOrigen() {
 		return origen;

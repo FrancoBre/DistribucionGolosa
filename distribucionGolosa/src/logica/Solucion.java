@@ -18,7 +18,7 @@ public class Solucion {
 		return (ArrayList<CentroDistribucion>) centrosElegidos.clone();
 	}
 	
-	public void añadirElementos(CentroDistribucion elemento) {
+	public void aniadirElementos(CentroDistribucion elemento) {
 		this.centrosElegidos.add(elemento);
 	}
 }

@@ -9,6 +9,7 @@ import org.junit.Test;
 import logica.Algoritmos;
 import logica.CentroDistribucion;
 import logica.Cliente;
+import logica.ComparadorPorConveniencia;
 import logica.ComparadorPorDistPromedio;
 import logica.Coordenada;
 import logica.Instancia;
@@ -24,17 +25,23 @@ public class SolverTest {
 	}
 	
 	@Test
-	public void centrosOrdenadosTest() {	
+	public void centrosOrdenadosDistPromedioTest() {	
 		Instancia instancia = ejemplo(5);
 		Solver solver = new Solver(instancia, new ComparadorPorDistPromedio());
 		
-		Algoritmos.valorarCentros(instancia);	// Esto debe hacerse en la clase aplicación
+		Algoritmos.valorarCentrosDistPromedio(instancia);	// Esto debe hacerse en la clase aplicacion
 		
 		assertEquals(new Coordenada(-34.63524, -58.7641), solver.centrosOrdenados().get(0).getCoordenada());
 		assertEquals(new Coordenada(-34.60967, -58.78195), solver.centrosOrdenados().get(1).getCoordenada());
 		assertEquals(new Coordenada(-34.65119, -58.78985), solver.centrosOrdenados().get(2).getCoordenada());
 		assertEquals(new Coordenada(-34.58664, -58.76084), solver.centrosOrdenados().get(3).getCoordenada());
 		assertEquals(new Coordenada(-34.62606, -58.70745), solver.centrosOrdenados().get(4).getCoordenada());
+	}
+	
+	@Test
+	public void centrosOrdenadosPorConveniencia() {
+		Instancia instancia = ejemplo(5);
+		Solver solver = new Solver(instancia, new ComparadorPorConveniencia(instancia));
 	}
 	
 	public Instancia ejemplo(int k) {

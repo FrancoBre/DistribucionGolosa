@@ -18,7 +18,7 @@ public class Solver {
 		ArrayList<CentroDistribucion> centrosOrdenados = centrosOrdenados();
 		
 		for (int i = 0; i < this.instancia.getK(); i++) {
-			ret.añadirElementos(centrosOrdenados.get(i));
+			ret.aniadirElementos(centrosOrdenados.get(i));
 		}
 		
 		return ret;
