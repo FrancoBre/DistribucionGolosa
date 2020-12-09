@@ -42,6 +42,8 @@ public class SolverTest {
 	public void centrosOrdenadosPorConveniencia() {
 		Instancia instancia = ejemplo(5);
 		Solver solver = new Solver(instancia, new ComparadorPorConveniencia(instancia));
+		
+		
 	}
 	
 	public Instancia ejemplo(int k) {

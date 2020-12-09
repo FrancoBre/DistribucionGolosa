@@ -53,7 +53,12 @@ public class Algoritmos {
 	// Dado un centro de distribución y una instancia, devuelve la cantidad de clientes a los que les
 	// convendría que se abra ese centro de distribución
 	public static int cantCentrosQueLesConviene(CentroDistribucion centro, Instancia instancia) {
-		return 0;
+		int ret = 0;
+		
+		for(Cliente c : instancia.getClientes())
+			if(centroMasCercano(c, instancia).equals(centro)) ret++;
+		
+		return ret;
 	}
 	
 	public static Nodo centroMasCercano(Cliente cliente, Instancia instancia) {
