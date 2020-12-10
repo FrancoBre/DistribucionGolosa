@@ -59,7 +59,7 @@ public class Interfaz {
 		//Action leer Clientes
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				Cliente cli = new Cliente(coor);
+				
 			}
 		});
 		btnNewButton.setBounds(10, 58, 175, 29);

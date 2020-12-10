@@ -13,6 +13,14 @@ public class Instancia {
 		this.k = k;
 	}
 	
+	public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public void setCentros(ArrayList<CentroDistribucion> centros) {
+		this.centros = centros;
+	}
+
 	public Instancia(ArrayList<Cliente> clientes, ArrayList<CentroDistribucion> centros) {
 		this.clientes = clientes;
 		this.centros = centros;
