@@ -44,7 +44,11 @@ public class SolverTest {
 		Instancia instancia = ejemplo(5);
 		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorConveniencia(instancia));
 		
-		
+		assertEquals(new Coordenada(-34.63524, -58.7641), solver.centrosOrdenados().get(0).getCoordenada());
+		assertEquals(new Coordenada(-34.60967, -58.78195), solver.centrosOrdenados().get(1).getCoordenada());
+		assertEquals(new Coordenada(-34.65119, -58.78985), solver.centrosOrdenados().get(2).getCoordenada());
+		assertEquals(new Coordenada(-34.58664, -58.76084), solver.centrosOrdenados().get(3).getCoordenada());
+		assertEquals(new Coordenada(-34.62606, -58.70745), solver.centrosOrdenados().get(4).getCoordenada());
 	}
 	
 	@Test(expected = RuntimeException.class)
@@ -61,8 +65,13 @@ public class SolverTest {
 		SolverExacto solver = new SolverExacto(instancia);
 		
 		solver.resolver();
+		ArrayList<CentroDistribucion> centrosOrdenados = solver.getSolucion().getCentrosElegidos();
 		
-		
+		assertEquals(new Coordenada(-34.63524, -58.7641), centrosOrdenados.get(0).getCoordenada());
+		assertEquals(new Coordenada(-34.60967, -58.78195), centrosOrdenados.get(1).getCoordenada());
+		assertEquals(new Coordenada(-34.65119, -58.78985), centrosOrdenados.get(2).getCoordenada());
+		assertEquals(new Coordenada(-34.58664, -58.76084), centrosOrdenados.get(3).getCoordenada());
+		assertEquals(new Coordenada(-34.62606, -58.70745), centrosOrdenados.get(4).getCoordenada());
 	}
 	
 	public Instancia ejemplo(int k) {
