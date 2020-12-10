@@ -3,7 +3,6 @@ package logica;
 import java.util.ArrayList;
 
 public class Algoritmos {
-
 	// Calcula la distancia entre dos puntos en el mapa
 	public static double calcularDistancia(Coordenada origen, Coordenada destino) {
 
