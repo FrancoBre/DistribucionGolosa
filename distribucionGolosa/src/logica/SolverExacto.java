@@ -1,29 +1,27 @@
 package logica;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 
 public class SolverExacto {
-	Instancia instancia;
-	Solucion actual;
-	Solucion mejor; 
-	int cont;
+	private Instancia instancia;
+	private Solucion actual;
+	private Solucion mejor; 
 	
 	public SolverExacto(Instancia instancia) {
 		this.instancia = instancia;
-		this.cont = 0;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Solucion resolver() {
 		this.actual = new Solucion();
 		this.mejor = new Solucion();
 		
-		generarSubconjuntos(instancia.getCentros(), instancia.getCentros().size(), 0, 0, instancia.getK());
+		generarSubconjuntos(0, (ArrayList<CentroDistribucion>) instancia.getCentros().clone());
 		
 		return mejor;
 	}
 	
+	/*
 	// Print all subsets of given set[] 
     public void printSubsets() 
     { 
@@ -50,25 +48,34 @@ public class SolverExacto {
   
             System.out.println("}"); 
         } 
-    } 
+    } */
     
-    public void subconjuntos(int index, ArrayList<CentroDistribucion> centros) {
-    	if(index == centros.size()) {
+    public void generarSubconjuntos(int index, ArrayList<CentroDistribucion> centros) {
+    	if(index >= this.instancia.getCentros().size()) {
 			// Caso base
-			if(actual.getCentrosElegidos().size() == instancia.getK() && esMejorSolucion(this.actual, this.mejor)
-				mejor = clonar(actual);
+			if(this.actual.getCentrosElegidos().size() == this.instancia.getK() && 
+					Solucion.esMejorSolucion(this.actual, this.mejor, this.instancia))
+				
+				this.mejor = Solucion.clonar(this.actual);
 		}
 		else {
 			// Caso recursivo
 			actual.aniadirElementos(centros.get(index));
-			subconjuntos(index+1, centros);
+			generarSubconjuntos(index+1, centros);
 			
 			actual.quitarElementos(centros.get(index));
-			subconjuntos(index+1, centros);
+			generarSubconjuntos(index+1, centros);
 		}
-
+    }   
+    
+    public Solucion getSolucion() {
+    	if(this.mejor.getCentrosElegidos().size() == 0) 
+    		throw new RuntimeException("Ejecute el metodo resolver");
+    	else
+    		return this.mejor;
     }
 
+    /*
 	private void generarSubconjuntos(ArrayList<CentroDistribucion> centros, int n, int indexActual, int index, int k) {
 		if(index > n) return;	// Caso base
 		
@@ -87,13 +94,9 @@ public class SolverExacto {
 		
 		generarSubconjuntos(centros, n, indexActual+1, index+1, k-1);
 		generarSubconjuntos(centros, n, indexActual, index+1, k-1);
-	}
-	
-	private boolean esMejor(Solucion actual2, Solucion mejor2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	} */
 
+	
 	public static void main(String args[]) {
 		ArrayList<CentroDistribucion> centros = new ArrayList<CentroDistribucion>();
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
@@ -160,7 +163,19 @@ public class SolverExacto {
 		
 		Instancia instancia = new Instancia(clientes, centros, 5);
 		SolverExacto solver = new SolverExacto(instancia);
-		
+
+		long inicio = System.currentTimeMillis();
+			
 		solver.resolver();
+			
+		long fin = System.currentTimeMillis();
+		double tiempo = (fin - inicio) / 1000.0;
+			
+		System.out.println("n = " + 5 + ": " + tiempo + " seg.");
+		ArrayList<CentroDistribucion> centrosSolucion = solver.getSolucion().getCentrosElegidos();
+		
+		System.out.println("Los centros elegidos son");
+		for(CentroDistribucion cd : centrosSolucion)
+			System.out.println(cd.getNombre()+" con las coordenadas "+cd.getCoordenada());
 	}
 }

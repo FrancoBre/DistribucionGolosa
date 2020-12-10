@@ -32,7 +32,7 @@ public class Algoritmos {
 	}
 	
 	// Calcula que tan bueno es un centro segun su distancia promedio con los clientes
-	private static void valorarCentroDistPromedio(CentroDistribucion centro, ArrayList<Cliente> clientes) {
+	public static void valorarCentroDistPromedio(CentroDistribucion centro, ArrayList<Cliente> clientes) {
 		Digrafo grafo = new Digrafo();
 		int distanciaPromedio = 0;
 		
@@ -72,28 +72,3 @@ public class Algoritmos {
 		return grafo.arcoDeMenorPeso().getDestino();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

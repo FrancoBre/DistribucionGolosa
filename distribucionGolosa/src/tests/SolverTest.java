@@ -40,9 +40,27 @@ public class SolverTest {
 	}
 	
 	@Test
-	public void centrosOrdenadosPorConveniencia() {
+	public void centrosOrdenadosPorConvenienciaTest() {
 		Instancia instancia = ejemplo(5);
 		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorConveniencia(instancia));
+		
+		
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void solucionVaciaTest() {
+		Instancia instancia = ejemplo(5);
+		SolverExacto solver = new SolverExacto(instancia);
+		
+		solver.getSolucion();
+	}
+	
+	@Test
+	public void centrosOrdenadosExactoTest() {
+		Instancia instancia = ejemplo(5);
+		SolverExacto solver = new SolverExacto(instancia);
+		
+		solver.resolver();
 		
 		
 	}
