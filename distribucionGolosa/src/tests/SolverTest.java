@@ -13,21 +13,22 @@ import logica.ComparadorPorConveniencia;
 import logica.ComparadorPorDistPromedio;
 import logica.Coordenada;
 import logica.Instancia;
-import logica.Solver;
+import logica.SolverGoloso;
+import logica.SolverExacto;
 
 public class SolverTest {
 
 	@Test(expected = RuntimeException.class)
 	public void centrosNoValoradosTest() {
 		Instancia instancia = ejemplo(5);
-		Solver solver = new Solver(instancia, new ComparadorPorDistPromedio());
+		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorDistPromedio());
 		solver.resolver();
 	}
 	
 	@Test
 	public void centrosOrdenadosDistPromedioTest() {	
 		Instancia instancia = ejemplo(5);
-		Solver solver = new Solver(instancia, new ComparadorPorDistPromedio());
+		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorDistPromedio());
 		
 		Algoritmos.valorarCentrosDistPromedio(instancia);	// Esto debe hacerse en la clase aplicacion
 		
@@ -41,7 +42,7 @@ public class SolverTest {
 	@Test
 	public void centrosOrdenadosPorConveniencia() {
 		Instancia instancia = ejemplo(5);
-		Solver solver = new Solver(instancia, new ComparadorPorConveniencia(instancia));
+		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorConveniencia(instancia));
 		
 		
 	}

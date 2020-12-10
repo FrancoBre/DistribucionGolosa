@@ -3,7 +3,8 @@ package interfaz;
 import logica.ComparadorPorDistPromedio;
 import logica.Coordenada;
 import logica.Instancia;
-import logica.Solver;
+import logica.SolverGoloso;
+import logica.SolverExacto;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -35,8 +36,6 @@ public class Aplicacion {
 		
 		return instancia;
 	}
-
-	
 	
 	private ArrayList<CentroDistribucion> leerCentros() {
 		String json= "";
@@ -67,17 +66,16 @@ public class Aplicacion {
 		}
 		
 		return centros;
-		
 	}
 
 	public void realizarHeuristica1() {
-		Solver solver = new Solver(this.instancia, new ComparadorPorDistPromedio());
+		SolverGoloso solver = new SolverGoloso(this.instancia, new ComparadorPorDistPromedio());
 		Algoritmos.valorarCentrosDistPromedio(instancia);
 		solver.resolver();
 	}
 	
 	public void realizarHeuristica2() {
-		Solver solver = new Solver(this.instancia, new ComparadorPorConveniencia(this.instancia));
+		SolverGoloso solver = new SolverGoloso(this.instancia, new ComparadorPorConveniencia(this.instancia));
 		solver.resolver();
 	}
 	
