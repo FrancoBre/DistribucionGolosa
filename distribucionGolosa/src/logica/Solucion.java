@@ -21,4 +21,8 @@ public class Solucion {
 	public void aniadirElementos(CentroDistribucion elemento) {
 		this.centrosElegidos.add(elemento);
 	}
+	
+	public void quitarElementos(CentroDistribucion elemento) {
+		this.getCentrosElegidos().remove(elemento);
+	}
 }

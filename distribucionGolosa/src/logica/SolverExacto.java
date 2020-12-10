@@ -23,6 +23,51 @@ public class SolverExacto {
 		
 		return mejor;
 	}
+	
+	// Print all subsets of given set[] 
+    public void printSubsets() 
+    { 
+    	ArrayList<CentroDistribucion> centros = this.instancia.getCentros();
+        int n = centros.size(); 
+  
+        // Run a loop for printing all 2^n 
+        // subsets one by one 
+        for (int i = 0; i < (1<<n); i++) 
+        { 
+            System.out.print("{ "); 
+            
+            // Print current subset 
+            for (int j = 0; j < n; j++) 
+  
+                // (1<<j) is a number with jth bit 1 
+                // so when we 'and' them with the 
+                // subset number we get which numbers 
+                // are present in the subset and which 
+                // are not 
+                if ((i & (1 << j)) > 0)
+                	
+                    System.out.print(centros.get(j) + " "); 
+  
+            System.out.println("}"); 
+        } 
+    } 
+    
+    public void subconjuntos(int index, ArrayList<CentroDistribucion> centros) {
+    	if(index == centros.size()) {
+			// Caso base
+			if(actual.getCentrosElegidos().size() == instancia.getK() && esMejorSolucion(this.actual, this.mejor)
+				mejor = clonar(actual);
+		}
+		else {
+			// Caso recursivo
+			actual.aniadirElementos(centros.get(index));
+			subconjuntos(index+1, centros);
+			
+			actual.quitarElementos(centros.get(index));
+			subconjuntos(index+1, centros);
+		}
+
+    }
 
 	private void generarSubconjuntos(ArrayList<CentroDistribucion> centros, int n, int indexActual, int index, int k) {
 		if(index > n) return;	// Caso base
