@@ -3,7 +3,6 @@ package interfaz;
 import logica.ComparadorPorDistPromedio;
 import logica.Coordenada;
 import logica.Instancia;
-import logica.LeerJson;
 import logica.Solver;
 
 import java.io.BufferedReader;
@@ -20,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import logica.Algoritmos;
+import logica.CentroDistribucion;
 import logica.Cliente;
 import logica.ComparadorPorConveniencia;
 
@@ -31,15 +31,18 @@ public class Aplicacion {
 	}
 
 	private Instancia crearInstanciaConJSON() {
-		this.leerClientes();
-		return null;
+		Instancia instancia= new Instancia(leerClientes(), leerCentros(),1); 
+		
+		return instancia;
 	}
 
-	private void leerClientes() {
+	
+	
+	private ArrayList<CentroDistribucion> leerCentros() {
 		String json= "";
 		Gson gson = new Gson(); 
 		try {
-			BufferedReader bc = new BufferedReader(new FileReader("../DistribucionGolosa/distribucionGolosa/src/logica/cliente.json"));
+			BufferedReader bc = new BufferedReader(new FileReader("../DistribucionGolosa/distribucionGolosa/src/logica/centros.json"));
 			String linea= ""; 
 			while((linea = bc.readLine()) != null)
 			{
@@ -48,23 +51,25 @@ public class Aplicacion {
 			bc.close();
 					
 		} catch (FileNotFoundException ex) {
-			Logger.getLogger(LeerJson.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IOException ex) {
-			Logger.getLogger(LeerJson.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		
 		Type collectionType = new TypeToken<Collection<Coordenada>>(){}.getType();
 		Collection<Coordenada> c = gson.fromJson(json, collectionType);
 		ArrayList<Coordenada> newList = new ArrayList<>(c);
-		ArrayList<Cliente> clientes = new ArrayList<>();
+		ArrayList<CentroDistribucion> centros = new ArrayList<>();
 		
 		for(Coordenada coordenada : newList) {
-			Cliente cliente = new Cliente(coordenada);
-			clientes.add(cliente);
+			CentroDistribucion centro = new CentroDistribucion(coordenada);
+			centros.add(centro);
 		}
-		this.instancia.setClientes(clientes);
+		
+		return centros;
+		
 	}
-	
+
 	public void realizarHeuristica1() {
 		Solver solver = new Solver(this.instancia, new ComparadorPorDistPromedio());
 		Algoritmos.valorarCentrosDistPromedio(instancia);
@@ -78,5 +83,35 @@ public class Aplicacion {
 	
 	public void realizarAlgoritmoExacto() {
 		// TODO
+	}
+	
+	private  ArrayList<Cliente> leerClientes() {
+		String json= "";
+		Gson gson = new Gson(); 
+		try {
+			BufferedReader bc = new BufferedReader(new FileReader("../DistribucionGolosa/distribucionGolosa/src/logica/cliente.json"));
+			String linea= ""; 
+			while((linea = bc.readLine()) != null)
+			{
+				json += linea; 
+			}
+			bc.close();
+					
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+		Type collectionType = new TypeToken<Collection<Coordenada>>(){}.getType();
+		Collection<Coordenada> c = gson.fromJson(json, collectionType);
+		ArrayList<Coordenada> newList = new ArrayList<>(c);
+		ArrayList<Cliente> clientes = new ArrayList<>();
+		
+		for(Coordenada coordenada : newList) {
+			Cliente cliente = new Cliente(coordenada);
+			clientes.add(cliente);
+		}
+		return clientes;
 	}
 }
