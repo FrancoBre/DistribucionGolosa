@@ -1,6 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SolverExacto {
 	private Instancia instancia;
@@ -16,18 +17,58 @@ public class SolverExacto {
 		this.actual = new Solucion();
 		this.mejor = new Solucion();
 		
-		generarSubconjuntos(0, (ArrayList<CentroDistribucion>) instancia.getCentros().clone());
+//		generarSubconjuntos(0, (ArrayList<CentroDistribucion>) instancia.getCentros().clone());
+		
+		int depth = Algoritmos.factorial(this.instancia.getCentros().size());
+		
+		int[] length = new int[depth];
+		int[] counters = new int[depth];
+		
+		Arrays.fill(counters,0);
+		
+		ArrayList<ArrayList<CentroDistribucion>> permutaciones = generatePerm(this.instancia.getCentros());
+		
+		System.out.println(permutaciones.size());
+		
+		for(ArrayList<CentroDistribucion> centros : permutaciones) {
+			System.out.print("{");
+			for(CentroDistribucion cd : centros) {
+				System.out.print(cd.getNombre()+" ");
+			}
+			System.out.print("}\n");
+		}
 		
 		return mejor;
 	}
+	
+	public ArrayList<ArrayList<CentroDistribucion>> generatePerm(ArrayList<CentroDistribucion> original) {
+	     if (original.isEmpty()) {
+	    	 ArrayList<ArrayList<CentroDistribucion>> result = new ArrayList<ArrayList<CentroDistribucion>>(); 
+	       result.add(new ArrayList<CentroDistribucion>()); 
+	       return result; 
+	     }
+	     CentroDistribucion firstElement = original.remove(0);
+	     ArrayList<ArrayList<CentroDistribucion>> returnValue = new ArrayList<>();
+	     ArrayList<ArrayList<CentroDistribucion>> permutations = generatePerm(original);
+	     for (ArrayList<CentroDistribucion> smallerPermutated : permutations) {
+	       for (int index=0; index <= smallerPermutated.size(); index++) {
+	    	   ArrayList<CentroDistribucion> temp = new ArrayList<>(smallerPermutated);
+	         temp.add(index, firstElement);
+	         returnValue.add(temp);
+	       }
+	     }
+	     return returnValue;
+	   }
     
     public void generarSubconjuntos(int index, ArrayList<CentroDistribucion> centros) {
     	if(index >= this.instancia.getCentros().size()) {
 			// Caso base
 			if(this.actual.getCentrosElegidos().size() == this.instancia.getK() && 
-					Solucion.esMejorSolucion(this.actual, this.mejor, this.instancia))
+					Solucion.esMejorSolucion(this.actual, this.mejor, this.instancia)) {
 				
+				System.out.println(this.actual); // Genera una sola solucion
 				this.mejor = Solucion.clonar(this.actual);
+			}
 		}
 		else {
 			// Caso recursivo
@@ -35,7 +76,7 @@ public class SolverExacto {
 			generarSubconjuntos(index+1, centros);
 			
 			actual.quitarElementos(centros.get(index));
-			generarSubconjuntos(index+1, centros);
+			generarSubconjuntos(index, centros);
 		}
     }   
     
@@ -117,14 +158,14 @@ public class SolverExacto {
 			
 		solver.resolver();
 			
-		long fin = System.currentTimeMillis();
-		double tiempo = (fin - inicio) / 1000.0;
-			
-		System.out.println("n = " + 5 + ": " + tiempo + " seg.");
-		ArrayList<CentroDistribucion> centrosSolucion = solver.getSolucion().getCentrosElegidos();
-		
-		System.out.println("Los centros elegidos son");
-		for(CentroDistribucion cd : centrosSolucion)
-			System.out.println(cd.getNombre()+" con las coordenadas "+cd.getCoordenada());
+//		long fin = System.currentTimeMillis();
+//		double tiempo = (fin - inicio) / 1000.0;
+//			
+//		System.out.println("n = " + 5 + ": " + tiempo + " seg.");
+//		ArrayList<CentroDistribucion> centrosSolucion = solver.getSolucion().getCentrosElegidos();
+//		
+//		System.out.println("Los centros elegidos son");
+//		for(CentroDistribucion cd : centrosSolucion)
+//			System.out.println(cd.getNombre()+" con las coordenadas "+cd.getCoordenada());
 	}
 }
