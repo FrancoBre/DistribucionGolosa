@@ -56,13 +56,23 @@ public class AlgoritmosTest {
 	}
 	
 	@Test
-	public void cantCentrosQueLesConvieneTest() {
+	public void cantCentrosQueLesConvieneTest1() {
 		Instancia instancia = ejemplo(5);
 		
 		Coordenada coor2 = new Coordenada(-34.60967, -58.78195);
 		CentroDistribucion centro2 = new CentroDistribucion(coor2, "Centro 2");
 		
 		assertEquals(3, Algoritmos.cantCentrosQueLesConviene(centro2, instancia));
+	}
+	
+	@Test
+	public void cantCentrosQueLesConvieneTest2() {
+		Instancia instancia = ejemplo(5);
+		
+		Coordenada coor3 = new Coordenada(-34.63524, -58.7641);
+		CentroDistribucion centro3 = new CentroDistribucion(coor3, "Centro 3");
+		
+		assertEquals(3, Algoritmos.cantCentrosQueLesConviene(centro3, instancia));
 	}
 
 	public Coordenada ushuaia() {

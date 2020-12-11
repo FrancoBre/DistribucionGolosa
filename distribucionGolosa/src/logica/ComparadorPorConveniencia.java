@@ -17,6 +17,6 @@ public class ComparadorPorConveniencia implements Comparator<CentroDistribucion>
 		if(Algoritmos.cantCentrosQueLesConviene(cd1, instancia) < 
 		Algoritmos.cantCentrosQueLesConviene(cd2, instancia)) return -1;
 		
-		return 0;
-	}
+		return -1;	// Si tienen la misma cantidad de clientes mas cercanos
+	}				// devuelve el centro 1 como mayor
 }
