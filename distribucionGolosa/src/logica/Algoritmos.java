@@ -1,7 +1,6 @@
 package logica;
 
 import java.util.ArrayList;
-import java.util.stream.LongStream;
 
 public class Algoritmos {
 	// Calcula la distancia entre dos puntos en el mapa
@@ -80,10 +79,5 @@ public class Algoritmos {
 		}
 		
 		return grafo.arcoDeMenorPeso().getDestino();
-	}
-
-	public static int factorial(int n) {
-		return (int) LongStream.rangeClosed(1, n)
-				.reduce(1, (long x, long y) -> x * y);
 	}
 }

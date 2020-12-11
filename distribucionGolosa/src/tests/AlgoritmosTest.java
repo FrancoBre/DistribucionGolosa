@@ -74,11 +74,6 @@ public class AlgoritmosTest {
 		
 		assertEquals(3, Algoritmos.cantCentrosQueLesConviene(centro3, instancia));
 	}
-	
-	@Test
-	public void factorialTest() {
-		assertEquals(5040, Algoritmos.factorial(7));
-	}
 
 	public Coordenada ushuaia() {
 		return new Coordenada(-54.807222, -68.304444);
