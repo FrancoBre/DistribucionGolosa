@@ -59,7 +59,7 @@ public class SolucionTest {
 			
 		Instancia instancia = instancia(1);
 			
-		assertEquals(104, Solucion.costoSolucion(solucion, instancia), 10e-3);
+		assertEquals(101, Solucion.costoSolucion(solucion, instancia), 10e-3);
 	}
 	
 	@Test

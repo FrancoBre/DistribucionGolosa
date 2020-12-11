@@ -29,8 +29,11 @@ public class Solucion {
 	// Una solucion es mejor que otra si la suma de todas las distancias de sus clientes a los centros elegidos es menor
 	// a la suma de todas las distancias de los clientes a los centros de la otra solucion 
 	public static boolean esMejorSolucion(Solucion solucion1, Solucion solucion2, Instancia instancia) {
-		return costoSolucion(solucion1, instancia) < costoSolucion(solucion2, instancia) && 
-				costoSolucion(solucion1, instancia) == 0 || costoSolucion(solucion2, instancia) == 0;
+		if(costoSolucion(solucion1, instancia) == 0 || costoSolucion(solucion2, instancia) == 0)
+			return true;
+		else 
+		return costoSolucion(solucion1, instancia) < costoSolucion(solucion2, instancia);
+
 	}
 
 	public static double costoSolucion(Solucion solucion, Instancia instancia) {
@@ -57,5 +60,10 @@ public class Solucion {
 			str.append(cd.getNombre()+" con las coordenadas "+cd.getCoordenada()+"\n");
 		
 		return str.toString();
+	}
+	
+	public static void main(String args[]) {
+		
+		
 	}
 }

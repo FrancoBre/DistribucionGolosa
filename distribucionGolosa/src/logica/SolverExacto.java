@@ -24,20 +24,13 @@ public class SolverExacto {
 	    
 	public void generarSubconjuntos(int index, ArrayList<CentroDistribucion> centros) {
 		if(index >= this.instancia.getCentros().size()) {
-			// Caso base
-			/*System.out.print("{");
-			for(CentroDistribucion cd : this.actual.getCentrosElegidos()) {
-				System.out.print(cd.getNombre()+" ");
-			}
-			System.out.print("}\n"); */
-			
+
 			if(this.actual.getCentrosElegidos().size() == this.instancia.getK() && 
-					Solucion.esMejorSolucion(this.actual, this.mejor, this.instancia)) {
+					Solucion.esMejorSolucion(this.actual, this.mejor, this.instancia)) 
 
 				this.mejor = Solucion.clonar(this.actual);
-				}
-		}
-		else {
+				
+		} else {
 			// Caso recursivo
 			actual.aniadirElementos(centros.get(index));
 			generarSubconjuntos(index+1, centros);
