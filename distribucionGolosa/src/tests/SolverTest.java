@@ -58,17 +58,17 @@ public class SolverTest {
 	
 	@Test
 	public void centrosOrdenadosExactoTest() {
-		Instancia instancia = ejemplo(5);
+		Instancia instancia = ejemplo(2);
 		SolverExacto solver = new SolverExacto(instancia);
 		
-		solver.resolver();
-		ArrayList<CentroDistribucion> centrosOrdenados = solver.resolver().getCentrosElegidos();
+		Coordenada cd2 = new Coordenada(-34.60967, -58.78195);
+		CentroDistribucion centro2 = new CentroDistribucion(cd2, "Centro 2");
 		
-		assertEquals(new Coordenada(-34.63524, -58.7641), centrosOrdenados.get(1).getCoordenada());
-		assertEquals(new Coordenada(-34.60967, -58.78195), centrosOrdenados.get(0).getCoordenada());
-		assertEquals(new Coordenada(-34.65119, -58.78985), centrosOrdenados.get(2).getCoordenada());
-		assertEquals(new Coordenada(-34.58664, -58.76084), centrosOrdenados.get(3).getCoordenada());
-		assertEquals(new Coordenada(-34.62606, -58.70745), centrosOrdenados.get(4).getCoordenada());
+		Coordenada cd3 = new Coordenada(-34.63524, -58.7641);
+		CentroDistribucion centro3 = new CentroDistribucion(cd3, "Centro 2");
+		
+		assertEquals(centro2 ,solver.resolver().getCentrosElegidos().get(0));
+		assertEquals(centro3 ,solver.resolver().getCentrosElegidos().get(1));
 	}
 	
 	public Instancia ejemplo(int k) {

@@ -109,7 +109,6 @@ public class SolucionTest {
 		Instancia instancia = instancia(2);
 		
 		assertTrue(Solucion.esMejorSolucion(solucion1, solucion2, instancia));
-		
 	}
 
 	public Solucion solucion() {

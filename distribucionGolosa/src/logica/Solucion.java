@@ -61,9 +61,4 @@ public class Solucion {
 		
 		return str.toString();
 	}
-	
-	public static void main(String args[]) {
-		
-		
-	}
 }
