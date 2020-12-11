@@ -12,10 +12,10 @@ public class ComparadorPorConveniencia implements Comparator<CentroDistribucion>
 	@Override
 	public int compare(CentroDistribucion cd1, CentroDistribucion cd2) {
 		if(Algoritmos.cantCentrosQueLesConviene(cd1, instancia) > 
-			Algoritmos.cantCentrosQueLesConviene(cd2, instancia)) return 1;
+			Algoritmos.cantCentrosQueLesConviene(cd2, instancia)) return -1;
 		
 		if(Algoritmos.cantCentrosQueLesConviene(cd1, instancia) < 
-		Algoritmos.cantCentrosQueLesConviene(cd2, instancia)) return -1;
+		Algoritmos.cantCentrosQueLesConviene(cd2, instancia)) return 1;
 		
 		return -1;	// Si tienen la misma cantidad de clientes mas cercanos
 	}				// devuelve el centro 1 como mayor
