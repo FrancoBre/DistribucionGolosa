@@ -20,35 +20,6 @@ public class SolverExacto {
 		
 		return mejor;
 	}
-	
-	/*
-	// Print all subsets of given set[] 
-    public void printSubsets() 
-    { 
-    	ArrayList<CentroDistribucion> centros = this.instancia.getCentros();
-        int n = centros.size(); 
-  
-        // Run a loop for printing all 2^n 
-        // subsets one by one 
-        for (int i = 0; i < (1<<n); i++) 
-        { 
-            System.out.print("{ "); 
-            
-            // Print current subset 
-            for (int j = 0; j < n; j++) 
-  
-                // (1<<j) is a number with jth bit 1 
-                // so when we 'and' them with the 
-                // subset number we get which numbers 
-                // are present in the subset and which 
-                // are not 
-                if ((i & (1 << j)) > 0)
-                	
-                    System.out.print(centros.get(j) + " "); 
-  
-            System.out.println("}"); 
-        } 
-    } */
     
     public void generarSubconjuntos(int index, ArrayList<CentroDistribucion> centros) {
     	if(index >= this.instancia.getCentros().size()) {
@@ -74,28 +45,6 @@ public class SolverExacto {
     	else
     		return this.mejor;
     }
-
-    /*
-	private void generarSubconjuntos(ArrayList<CentroDistribucion> centros, int n, int indexActual, int index, int k) {
-		if(index > n) return;	// Caso base
-		
-		if(k == 0) {
-			System.out.println("\n\n"+"Iteracion "+cont);
-			for(int i = 0; i < indexActual; i++) {
-				System.out.print(centros.get(i).getNombre()+" ");
-				this.actual.aniadirElementos(centros.get(i));
-			}
-			cont++;
-			return;
-		}
-		
-//		this.actual.aniadirElementos(centros.get(indexActual));
-		if(esMejor(this.actual, this.mejor)) this.mejor = this.actual;
-		
-		generarSubconjuntos(centros, n, indexActual+1, index+1, k-1);
-		generarSubconjuntos(centros, n, indexActual, index+1, k-1);
-	} */
-
 	
 	public static void main(String args[]) {
 		ArrayList<CentroDistribucion> centros = new ArrayList<CentroDistribucion>();

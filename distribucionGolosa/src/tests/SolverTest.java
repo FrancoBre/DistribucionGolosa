@@ -122,7 +122,7 @@ public class SolverTest {
 		Cliente cliente6 = new Cliente(c6, "Cliente 6");
 		clientes.add(cliente6);
 		
-		Coordenada c7 = new Coordenada(-34.59633, -58.7745);
+		Coordenada c7 = new Coordenada(-34.59961, -58.77621);
 		Cliente cliente7 = new Cliente(c7, "Cliente 7");
 		clientes.add(cliente7);
 		
