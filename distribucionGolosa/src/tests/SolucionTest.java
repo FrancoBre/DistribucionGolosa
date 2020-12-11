@@ -42,6 +42,75 @@ public class SolucionTest {
 		
 		assertTrue(Solucion.esMejorSolucion(solucion1, solucion2, instancia(5)));
 	}
+	
+	@Test
+	public void costoSolucionTest1() {
+		ArrayList<CentroDistribucion> centros = new ArrayList<CentroDistribucion>();
+			
+		Coordenada cd5 = new Coordenada(-34.62606, -58.70745);
+		CentroDistribucion centro5 = new CentroDistribucion(cd5, "Centro 5");
+			
+		Coordenada cd1 = new Coordenada(-34.58664, -58.76084);
+		CentroDistribucion centro1 = new CentroDistribucion(cd1, "Centro 1");
+			
+		centros.add(centro5);
+		centros.add(centro1);
+		Solucion solucion = new Solucion(centros);
+			
+		Instancia instancia = instancia(1);
+			
+		assertEquals(104, Solucion.costoSolucion(solucion, instancia), 10e-3);
+	}
+	
+	@Test
+	public void costoSolucionTest2() {
+		ArrayList<CentroDistribucion> centros1 = new ArrayList<CentroDistribucion>();
+		
+		Coordenada cd2 = new Coordenada(-34.60967, -58.78195);
+		CentroDistribucion centro2 = new CentroDistribucion(cd2, "Centro 2");
+		
+		Coordenada cd3 = new Coordenada(-34.63524, -58.7641);
+		CentroDistribucion centro3 = new CentroDistribucion(cd3, "Centro 2");
+		
+		centros1.add(centro2);
+		centros1.add(centro3);
+		Solucion solucion1 = new Solucion(centros1);
+		
+		Instancia instancia = instancia(1);
+		
+		assertEquals(58, Solucion.costoSolucion(solucion1, instancia), 10e-3);
+	}
+	
+	@Test
+	public void mejorSolucionTest() {
+		ArrayList<CentroDistribucion> centros1 = new ArrayList<CentroDistribucion>();
+		ArrayList<CentroDistribucion> centros2 = new ArrayList<CentroDistribucion>();
+		
+		Coordenada cd1 = new Coordenada(-34.58664, -58.76084);
+		CentroDistribucion centro1 = new CentroDistribucion(cd1, "Centro 1");
+
+		Coordenada cd2 = new Coordenada(-34.60967, -58.78195);
+		CentroDistribucion centro2 = new CentroDistribucion(cd2, "Centro 2");
+		
+		Coordenada cd3 = new Coordenada(-34.63524, -58.7641);
+		CentroDistribucion centro3 = new CentroDistribucion(cd3, "Centro 2");
+		
+		Coordenada cd5 = new Coordenada(-34.62606, -58.70745);
+		CentroDistribucion centro5 = new CentroDistribucion(cd5, "Centro 5");
+
+		centros1.add(centro2);
+		centros1.add(centro3);
+		Solucion solucion1 = new Solucion(centros1);
+		
+		centros2.add(centro5);
+		centros2.add(centro1);
+		Solucion solucion2 = new Solucion(centros2);
+		
+		Instancia instancia = instancia(2);
+		
+		assertTrue(Solucion.esMejorSolucion(solucion1, solucion2, instancia));
+		
+	}
 
 	public Solucion solucion() {
 		Solucion ret = new Solucion();

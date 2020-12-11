@@ -56,21 +56,13 @@ public class SolverTest {
 		assertEquals(new Coordenada(-34.62606, -58.70745), solver.centrosOrdenados().get(4).getCoordenada());
 	}
 	
-	@Test(expected = RuntimeException.class)
-	public void solucionVaciaTest() {
-		Instancia instancia = ejemplo(5);
-		SolverExacto solver = new SolverExacto(instancia);
-		
-		solver.getSolucion();
-	}
-	
 	@Test
 	public void centrosOrdenadosExactoTest() {
 		Instancia instancia = ejemplo(5);
 		SolverExacto solver = new SolverExacto(instancia);
 		
 		solver.resolver();
-		ArrayList<CentroDistribucion> centrosOrdenados = solver.getSolucion().getCentrosElegidos();
+		ArrayList<CentroDistribucion> centrosOrdenados = solver.resolver().getCentrosElegidos();
 		
 		assertEquals(new Coordenada(-34.63524, -58.7641), centrosOrdenados.get(1).getCoordenada());
 		assertEquals(new Coordenada(-34.60967, -58.78195), centrosOrdenados.get(0).getCoordenada());

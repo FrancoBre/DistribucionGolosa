@@ -3,9 +3,9 @@ package logica;
 import java.util.ArrayList;
 
 public class Instancia {
-	ArrayList<Cliente> clientes;
-	ArrayList<CentroDistribucion> centros;
-	int k;
+	private ArrayList<Cliente> clientes;
+	private ArrayList<CentroDistribucion> centros;
+	private int k;
 	
 	public Instancia(ArrayList<Cliente> clientes, ArrayList<CentroDistribucion> centros, int k) {
 		this.clientes = clientes;
@@ -33,7 +33,7 @@ public class Instancia {
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<CentroDistribucion> getCentros() {
-		return (ArrayList<CentroDistribucion>) centros.clone();
+ 		return (ArrayList<CentroDistribucion>) centros.clone();
 	}
 	
 	public void setK(int k) {
