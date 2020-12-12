@@ -16,11 +16,18 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
+
 
 public class Interfaz {
 
 	private JFrame frame;
-
+	private JPanel map; 
 	/**
 	 * Launch the application.
 	 */
@@ -47,6 +54,7 @@ public class Interfaz {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -89,10 +97,6 @@ public class Interfaz {
 		lblNewLabel.setBounds(10, 11, 182, 36);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JScrollPane grilla = new JScrollPane();
-		grilla.setBounds(202, 11, 393, 217);
-		frame.getContentPane().add(grilla);
-		
 		JButton btnNewButton_2_1 = new JButton("Soluci\u00F3n 2");
 		//Action Solución 2
 		btnNewButton_2_1.addActionListener(new ActionListener() {
@@ -110,5 +114,17 @@ public class Interfaz {
 		});
 		btnNewButton_2_1_1.setBounds(10, 194, 175, 29);
 		frame.getContentPane().add(btnNewButton_2_1_1);
+		
+		JPanel Map = new JPanel();
+		Map.setBounds(205, 11, 305, 214);
+		frame.getContentPane().add(Map);
+		
+		map = new JMapViewer();
+		((JMapViewer) map).setZoomContolsVisible(true);
+		Coordinate coordinate = new Coordinate(-34.521, -58.7008);
+		((JMapViewer) map).setDisplayPosition(coordinate, 15);
+		
+		Map.add(map);
+
 	}
 }
