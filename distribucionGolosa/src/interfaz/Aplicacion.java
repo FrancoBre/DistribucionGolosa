@@ -32,7 +32,7 @@ public class Aplicacion {
 	}
 
 	private Instancia crearInstanciaConJSON() {
-		Instancia instancia= new Instancia(leerClientes(), leerCentros(),1); 
+		Instancia instancia= new Instancia(leerClientes(), leerCentros(),1);
 		
 		return instancia;
 	}
@@ -83,7 +83,7 @@ public class Aplicacion {
 		// TODO
 	}
 	
-	private  ArrayList<Cliente> leerClientes() {
+	static ArrayList<Cliente> leerClientes() {
 		String json= "";
 		Gson gson = new Gson(); 
 		try {
@@ -110,6 +110,18 @@ public class Aplicacion {
 			Cliente cliente = new Cliente(coordenada);
 			clientes.add(cliente);
 		}
+		
+		for (Cliente cli: clientes) {
+			System.out.println(cli.getNombre());
+			System.out.println(cli.getCoordenada());
+		}
+		
 		return clientes;
 	}
+	public static void main(String[] args) {
+		leerClientes(); 
+		
+	}
+	
+	
 }
