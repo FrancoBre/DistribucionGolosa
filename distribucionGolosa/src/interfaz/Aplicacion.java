@@ -3,6 +3,7 @@ package interfaz;
 import logica.ComparadorPorDistPromedio;
 import logica.Coordenada;
 import logica.Instancia;
+import logica.Solucion;
 import logica.SolverGoloso;
 
 import java.io.BufferedReader;
@@ -24,14 +25,14 @@ import logica.Cliente;
 import logica.ComparadorPorConveniencia;
 
 public class Aplicacion {
-	private Instancia instancia;
+	public static Instancia instancia;
 
 	public Aplicacion() {
-		this.instancia = crearInstanciaConJSON();
+		instancia = crearInstanciaConJSON();
 	}
 
 	private Instancia crearInstanciaConJSON() {
-		Instancia instancia= new Instancia(leerClientes(), leerCentros(),1);
+		Instancia instancia= new Instancia(leerClientes(), leerCentros(),2);
 		
 		return instancia;
 	}
@@ -67,14 +68,15 @@ public class Aplicacion {
 		return centros;
 	}
 
-	public void realizarHeuristica1() {
-		SolverGoloso solver = new SolverGoloso(this.instancia, new ComparadorPorDistPromedio());
+	 
+	static Solucion realizarHeuristica1() {
+		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorDistPromedio());
 		Algoritmos.valorarCentrosDistPromedio(instancia);
-		solver.resolver();
+		return solver.resolver();
 	}
 	
 	public void realizarHeuristica2() {
-		SolverGoloso solver = new SolverGoloso(this.instancia, new ComparadorPorConveniencia(this.instancia));
+		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorConveniencia(instancia));
 		solver.resolver();
 	}
 	
@@ -86,7 +88,7 @@ public class Aplicacion {
 		String json= "";
 		Gson gson = new Gson(); 
 		try {
-			BufferedReader bc = new BufferedReader(new FileReader("../DistribucionGolosa/distribucionGolosa/src/logica/centros.json"));
+			BufferedReader bc = new BufferedReader(new FileReader("../DistribucionGolosa/distribucionGolosa/src/logica/cliente.json"));
 			String linea= ""; 
 			while((linea = bc.readLine()) != null)
 			{
@@ -110,11 +112,11 @@ public class Aplicacion {
 			clientes.add(cliente);
 		}
 		
+		System.out.println(clientes.size());
 		for (Cliente cli: clientes) {
 			System.out.println(cli.getNombre());
 			System.out.println(cli.getCoordenada());
 		}
-		
 		return clientes;
 	}
 	

@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import logica.CentroDistribucion;
 import logica.Cliente;
+import logica.Solucion;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -60,8 +61,7 @@ public class Interfaz {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setAlwaysOnTop(true);
-		frame.setBounds(100, 100, 619, 275);
+		frame.setBounds(100, 100, 619, 399);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -78,14 +78,13 @@ public class Interfaz {
 		
 		//Creacion de panel para mapa 
 		JPanel Map = new JPanel();
-		Map.setBounds(205, 11, 305, 214);
+		Map.setBounds(195, 11, 315, 338);
 		frame.getContentPane().add(Map);
 		
 		mapa = new JMapViewer();
 		((JMapViewer) mapa).setZoomContolsVisible(true);
-		Coordinate coordinate = new Coordinate(-34.521, -58.7008);
+		Coordinate coordinate = new Coordinate(-34.62125, -58.77766);
 		((JMapViewer) mapa).setDisplayPosition(coordinate, 12);
-		
 		Map.add(mapa);
 
 	}
@@ -97,16 +96,10 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent arg0) {
 				ArrayList<Cliente> cliente= new ArrayList<Cliente>(); 
 				cliente=Aplicacion.leerClientes(); 
-				for (Cliente c: cliente) {
-					Coordinate coordenada= new Coordinate(c.getCoordenada().getLatitud(),c.getCoordenada().getLongitud()); 
-					MapMarker marcador = new MapMarkerDot(c.getNombre(), coordenada);
-					marcador.getStyle().setBackColor(Color.RED); 
-					marcador.getStyle().setColor(Color.RED);
-					mapa.addMapMarker(marcador);
-				}
+				agregarMarcadoresClientes(cliente);
 			}
 		});
-		btnLeerClientes.setBounds(10, 58, 175, 29);
+		btnLeerClientes.setBounds(10, 68, 175, 29);
 		frame.getContentPane().add(btnLeerClientes);
 	}
 	
@@ -117,16 +110,10 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent arg0) {
 				ArrayList<CentroDistribucion> centros= new ArrayList<CentroDistribucion>(); 
 				centros=Aplicacion.leerCentros(); 
-				for (CentroDistribucion c: centros) {
-					Coordinate coordenada= new Coordinate(c.getCoordenada().getLatitud(),c.getCoordenada().getLongitud()); 
-					MapMarker marcador = new MapMarkerDot(c.getNombre(), coordenada);
-					marcador.getStyle().setBackColor(Color.BLUE); 
-					marcador.getStyle().setColor(Color.BLUE);
-					mapa.addMapMarker(marcador);
-				}
+				agregarMarcadoresCentros(centros, Color.BLUE);
 			}
 		});
-		btnLeerPosiblesDistribuidoras.setBounds(10, 92, 175, 29);
+		btnLeerPosiblesDistribuidoras.setBounds(10, 108, 175, 29);
 		frame.getContentPane().add(btnLeerPosiblesDistribuidoras);
 	}
 
@@ -135,9 +122,14 @@ public class Interfaz {
 		//Action Solución 1
 		btnsol1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Solucion solucion= new Solucion(); 
+				solucion= Aplicacion.realizarHeuristica1(); 
+				ArrayList<CentroDistribucion> centrosElegidos= new ArrayList<CentroDistribucion>(); 
+				centrosElegidos = solucion.getCentrosElegidos(); 
+				marcarCentrosElegidos(centrosElegidos,Color.MAGENTA);
 			}
 		});
-		btnsol1.setBounds(10, 126, 175, 29);
+		btnsol1.setBounds(10, 149, 175, 29);
 		frame.getContentPane().add(btnsol1);
 	}
 	private void mostrarSolucion2() {
@@ -145,9 +137,44 @@ public class Interfaz {
 		//Action Solución 2
 		btnsol2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Solucion solucion= new Solucion(); 
+				solucion= Aplicacion.realizarHeuristica1(); 
+				ArrayList<CentroDistribucion> centrosElegidos= new ArrayList<CentroDistribucion>(); 
+				centrosElegidos = solucion.getCentrosElegidos(); 
+				marcarCentrosElegidos(centrosElegidos,Color.GREEN);
 			}
 		});
-		btnsol2.setBounds(10, 159, 175, 29);
+		btnsol2.setBounds(10, 193, 175, 29);
 		frame.getContentPane().add(btnsol2);
+	}
+
+	private void agregarMarcadoresCentros(ArrayList<CentroDistribucion> centros, Color color) {
+		for (CentroDistribucion c: centros) {
+			Coordinate coordenada= new Coordinate(c.getCoordenada().getLatitud(),c.getCoordenada().getLongitud()); 
+			MapMarker marcador = new MapMarkerDot(c.getNombre(), coordenada);
+			marcador.getStyle().setBackColor(color); 
+			marcador.getStyle().setColor(color);
+			mapa.addMapMarker(marcador);
+		}
+	}
+	
+	private void marcarCentrosElegidos(ArrayList<CentroDistribucion> centrosElegidos, Color color) {
+		for (CentroDistribucion c: centrosElegidos) {
+			Coordinate coordenada= new Coordinate(c.getCoordenada().getLatitud(),c.getCoordenada().getLongitud()); 
+			MapMarker marcador = new MapMarkerDot(c.getNombre(), coordenada);
+			marcador.getStyle().setBackColor(color); 
+			marcador.getStyle().setColor(color);
+			mapa.addMapMarker(marcador);
+		}
+	}
+	
+	private void agregarMarcadoresClientes(ArrayList<Cliente> cliente) {
+		for (Cliente c: cliente) {
+			Coordinate coordenada= new Coordinate(c.getCoordenada().getLatitud(),c.getCoordenada().getLongitud()); 
+			MapMarker marcador = new MapMarkerDot(c.getNombre(), coordenada);
+			marcador.getStyle().setBackColor(Color.RED); 
+			marcador.getStyle().setColor(Color.RED);
+			mapa.addMapMarker(marcador);
+		}
 	}
 }
