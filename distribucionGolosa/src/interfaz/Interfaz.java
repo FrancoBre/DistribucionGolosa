@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+
+import logica.CentroDistribucion;
 import logica.Cliente;
 
 import javax.swing.JLabel;
@@ -113,6 +115,15 @@ public class Interfaz {
 		//Action leer Distribuidoras
 		btnLeerPosiblesDistribuidoras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ArrayList<CentroDistribucion> centros= new ArrayList<CentroDistribucion>(); 
+				centros=Aplicacion.leerCentros(); 
+				for (CentroDistribucion c: centros) {
+					Coordinate coordenada= new Coordinate(c.getCoordenada().getLatitud(),c.getCoordenada().getLongitud()); 
+					MapMarker marcador = new MapMarkerDot(c.getNombre(), coordenada);
+					marcador.getStyle().setBackColor(Color.BLUE); 
+					marcador.getStyle().setColor(Color.BLUE);
+					mapa.addMapMarker(marcador);
+				}
 			}
 		});
 		btnLeerPosiblesDistribuidoras.setBounds(10, 92, 175, 29);

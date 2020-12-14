@@ -4,7 +4,6 @@ import logica.ComparadorPorDistPromedio;
 import logica.Coordenada;
 import logica.Instancia;
 import logica.SolverGoloso;
-import logica.SolverExacto;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -37,7 +36,7 @@ public class Aplicacion {
 		return instancia;
 	}
 	
-	private ArrayList<CentroDistribucion> leerCentros() {
+	static ArrayList<CentroDistribucion> leerCentros() {
 		String json= "";
 		Gson gson = new Gson(); 
 		try {
@@ -80,14 +79,14 @@ public class Aplicacion {
 	}
 	
 	public void realizarAlgoritmoExacto() {
-		// TODO
+		//
 	}
 	
 	static ArrayList<Cliente> leerClientes() {
 		String json= "";
 		Gson gson = new Gson(); 
 		try {
-			BufferedReader bc = new BufferedReader(new FileReader("../DistribucionGolosa/distribucionGolosa/src/logica/cliente.json"));
+			BufferedReader bc = new BufferedReader(new FileReader("../DistribucionGolosa/distribucionGolosa/src/logica/centros.json"));
 			String linea= ""; 
 			while((linea = bc.readLine()) != null)
 			{
@@ -118,10 +117,9 @@ public class Aplicacion {
 		
 		return clientes;
 	}
+	
+	//puse esto para probar si trae todo bien del json
 	public static void main(String[] args) {
-		leerClientes(); 
-		
+		leerClientes(); 	
 	}
-	
-	
 }
