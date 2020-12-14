@@ -96,7 +96,7 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent arg0) {
 				ArrayList<Cliente> cliente= new ArrayList<Cliente>(); 
 				cliente=Aplicacion.leerClientes(); 
-				agregarMarcadoresClientes(cliente);
+				agregarMarcadoresClientes(cliente, Color.RED);
 			}
 		});
 		btnLeerClientes.setBounds(10, 68, 175, 29);
@@ -168,12 +168,12 @@ public class Interfaz {
 		}
 	}
 	
-	private void agregarMarcadoresClientes(ArrayList<Cliente> cliente) {
+	private void agregarMarcadoresClientes(ArrayList<Cliente> cliente, Color color) {
 		for (Cliente c: cliente) {
 			Coordinate coordenada= new Coordinate(c.getCoordenada().getLatitud(),c.getCoordenada().getLongitud()); 
 			MapMarker marcador = new MapMarkerDot(c.getNombre(), coordenada);
-			marcador.getStyle().setBackColor(Color.RED); 
-			marcador.getStyle().setColor(Color.RED);
+			marcador.getStyle().setBackColor(color); 
+			marcador.getStyle().setColor(color);
 			mapa.addMapMarker(marcador);
 		}
 	}
