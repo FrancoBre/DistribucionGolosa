@@ -37,6 +37,17 @@ public class Aplicacion {
 		return instancia;
 	}
 	
+	 static Solucion realizarHeuristica1() {
+			SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorDistPromedio());
+			Algoritmos.valorarCentrosDistPromedio(instancia);
+			return solver.resolver();
+		}
+		
+	 static Solucion realizarHeuristica2() {
+			SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorConveniencia(instancia));
+			return solver.resolver();
+		}
+	
 	static ArrayList<CentroDistribucion> leerCentros() {
 		String json= "";
 		Gson gson = new Gson(); 
@@ -68,18 +79,6 @@ public class Aplicacion {
 		return centros;
 	}
 
-	 
-	static Solucion realizarHeuristica1() {
-		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorDistPromedio());
-		Algoritmos.valorarCentrosDistPromedio(instancia);
-		return solver.resolver();
-	}
-	
-	public void realizarHeuristica2() {
-		SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorConveniencia(instancia));
-		solver.resolver();
-	}
-	
 	public void realizarAlgoritmoExacto() {
 		//
 	}

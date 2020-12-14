@@ -138,7 +138,7 @@ public class Interfaz {
 		btnsol2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Solucion solucion= new Solucion(); 
-				solucion= Aplicacion.realizarHeuristica1(); 
+				solucion= Aplicacion.realizarHeuristica2(); 
 				ArrayList<CentroDistribucion> centrosElegidos= new ArrayList<CentroDistribucion>(); 
 				centrosElegidos = solucion.getCentrosElegidos(); 
 				marcarCentrosElegidos(centrosElegidos,Color.GREEN);
