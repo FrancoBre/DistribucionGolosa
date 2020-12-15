@@ -29,8 +29,10 @@ public class Interfaz {
 	private JButton btnLeerClientes;
 	private JButton btnLeerPosiblesDistribuidoras;
 	private JButton btnsol1; 
-	private JButton btnsol2; 	
+	private JButton btnsol2; 
+	private JButton btnsol3;
 	private JMapViewer mapa;
+
 	/**
 	 * Launch the application.
 	 */
@@ -65,19 +67,16 @@ public class Interfaz {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
+		
 		leerClientes();
 		leerPosiblesDistribuidoras();
 		mostrarSolucion1();
 		mostrarSolucion2();	
-		
-		JLabel lblNewLabel = new JLabel("Distribuci\u00F3n Golosa");
-		lblNewLabel.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
-		lblNewLabel.setToolTipText("Distribuci\u00F3n Golosa");
-		lblNewLabel.setBounds(10, 11, 182, 36);
-		frame.getContentPane().add(lblNewLabel);
-		
+		mostrarSolucion3();
+	
 		//Creacion de panel para mapa 
-		JPanel Map = new JPanel();
+		JPanel Map = new JPanel();	
 		Map.setBounds(195, 11, 315, 338);
 		frame.getContentPane().add(Map);
 		
@@ -86,8 +85,9 @@ public class Interfaz {
 		Coordinate coordinate = new Coordinate(-34.62125, -58.77766);
 		((JMapViewer) mapa).setDisplayPosition(coordinate, 12);
 		Map.add(mapa);
-
+		
 	}
+
 	
 	private void leerClientes() {
 		btnLeerClientes = new JButton("Leer clientes");
@@ -99,8 +99,10 @@ public class Interfaz {
 				agregarMarcadoresClientes(cliente, Color.RED);
 			}
 		});
-		btnLeerClientes.setBounds(10, 68, 175, 29);
+		btnLeerClientes.setBounds(10, 80, 175, 29);
 		frame.getContentPane().add(btnLeerClientes);
+		
+		
 	}
 	
 	private void leerPosiblesDistribuidoras() {
@@ -113,8 +115,25 @@ public class Interfaz {
 				agregarMarcadoresCentros(centros, Color.BLUE);
 			}
 		});
-		btnLeerPosiblesDistribuidoras.setBounds(10, 108, 175, 29);
+		btnLeerPosiblesDistribuidoras.setBounds(10, 125, 175, 29);
 		frame.getContentPane().add(btnLeerPosiblesDistribuidoras);
+	}
+	
+	private void mostrarSolucion3() {
+		btnsol3 = new JButton("Solución 3");
+		btnsol3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Solucion solucion= new Solucion(); 
+				Aplicacion ap = new Aplicacion(); 
+				solucion= ap.realizarAlgoritmoExacto();
+				ArrayList<CentroDistribucion> centrosElegidos= new ArrayList<CentroDistribucion>(); 
+				centrosElegidos = solucion.getCentrosElegidos(); 
+				System.out.println(centrosElegidos.size());
+				marcarCentrosElegidos(centrosElegidos,Color.ORANGE);
+			}		
+		});
+		btnsol3.setBounds(10, 260, 175, 29);
+		frame.getContentPane().add(btnsol3);
 	}
 
 	private void mostrarSolucion1() {
@@ -123,13 +142,14 @@ public class Interfaz {
 		btnsol1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Solucion solucion= new Solucion(); 
-				solucion= Aplicacion.realizarHeuristica1(); 
+				Aplicacion ap = new Aplicacion(); 
+				solucion= ap.realizarHeuristica1();
 				ArrayList<CentroDistribucion> centrosElegidos= new ArrayList<CentroDistribucion>(); 
 				centrosElegidos = solucion.getCentrosElegidos(); 
 				marcarCentrosElegidos(centrosElegidos,Color.MAGENTA);
 			}
 		});
-		btnsol1.setBounds(10, 149, 175, 29);
+		btnsol1.setBounds(10, 170, 175, 29);
 		frame.getContentPane().add(btnsol1);
 	}
 	private void mostrarSolucion2() {
@@ -138,13 +158,14 @@ public class Interfaz {
 		btnsol2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Solucion solucion= new Solucion(); 
-				solucion= Aplicacion.realizarHeuristica2(); 
+				Aplicacion ap = new Aplicacion(); 
+				solucion = ap.realizarHeuristica2(); 
 				ArrayList<CentroDistribucion> centrosElegidos= new ArrayList<CentroDistribucion>(); 
 				centrosElegidos = solucion.getCentrosElegidos(); 
-				marcarCentrosElegidos(centrosElegidos,Color.GREEN);
+				marcarCentrosElegidos(centrosElegidos,Color.GREEN);	
 			}
 		});
-		btnsol2.setBounds(10, 193, 175, 29);
+		btnsol2.setBounds(10, 215, 175, 29);
 		frame.getContentPane().add(btnsol2);
 	}
 
@@ -160,6 +181,7 @@ public class Interfaz {
 	
 	private void marcarCentrosElegidos(ArrayList<CentroDistribucion> centrosElegidos, Color color) {
 		for (CentroDistribucion c: centrosElegidos) {
+			System.out.println("el index es"+ centrosElegidos.size());
 			Coordinate coordenada= new Coordinate(c.getCoordenada().getLatitud(),c.getCoordenada().getLongitud()); 
 			MapMarker marcador = new MapMarkerDot(c.getNombre(), coordenada);
 			marcador.getStyle().setBackColor(color); 

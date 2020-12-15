@@ -4,6 +4,7 @@ import logica.ComparadorPorDistPromedio;
 import logica.Coordenada;
 import logica.Instancia;
 import logica.Solucion;
+import logica.SolverExacto;
 import logica.SolverGoloso;
 
 import java.io.BufferedReader;
@@ -25,7 +26,7 @@ import logica.Cliente;
 import logica.ComparadorPorConveniencia;
 
 public class Aplicacion {
-	public static Instancia instancia;
+	public Instancia instancia;
 
 	public Aplicacion() {
 		instancia = crearInstanciaConJSON();
@@ -37,14 +38,14 @@ public class Aplicacion {
 		return instancia;
 	}
 	
-	 static Solucion realizarHeuristica1() {
-			SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorDistPromedio());
-			Algoritmos.valorarCentrosDistPromedio(instancia);
+	 public Solucion realizarHeuristica1() {
+			SolverGoloso solver = new SolverGoloso(this.instancia, new ComparadorPorDistPromedio());
+			Algoritmos.valorarCentrosDistPromedio(this.instancia);
 			return solver.resolver();
 		}
 		
-	 static Solucion realizarHeuristica2() {
-			SolverGoloso solver = new SolverGoloso(instancia, new ComparadorPorConveniencia(instancia));
+	 public Solucion realizarHeuristica2() {
+			SolverGoloso solver = new SolverGoloso(this.instancia, new ComparadorPorConveniencia(instancia));
 			return solver.resolver();
 		}
 	
@@ -79,8 +80,10 @@ public class Aplicacion {
 		return centros;
 	}
 
-	public void realizarAlgoritmoExacto() {
-		//
+	public Solucion realizarAlgoritmoExacto() {
+		SolverExacto solver = new SolverExacto(instancia); 
+		
+		return solver.resolver();
 	}
 	
 	static ArrayList<Cliente> leerClientes() {
@@ -110,17 +113,6 @@ public class Aplicacion {
 			Cliente cliente = new Cliente(coordenada);
 			clientes.add(cliente);
 		}
-		
-		System.out.println(clientes.size());
-		for (Cliente cli: clientes) {
-			System.out.println(cli.getNombre());
-			System.out.println(cli.getCoordenada());
-		}
 		return clientes;
-	}
-	
-	//puse esto para probar si trae todo bien del json
-	public static void main(String[] args) {
-		leerClientes(); 	
 	}
 }
